@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #282c35; /* Dark background color */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #4CAF50; /* Green text color */
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+            color: #555; /* Slightly darker text color */
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="password"], select {
+            width: 92%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f2f2f2; /* Light gray background */
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45A049;
+        }
+
+        /* Styling for the Admin Data Entry section */
+        #admin-data-entry {
+            display: none;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            background-color: #fff; /* White background to separate from the grey background */
+        }
+
+        #admin-data-entry h2 {
+            color: #4CAF50;
+        }
+
+        #admin-data-entry label {
+            font-weight: bold;
+        }
+
+        /* Styling for the Logout button */
+        #logout-button {
+            display: none;
+            background-color: #ff4c4c; /* Red background color */
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="login-container">
+        <h2>Login</h2>
+        <form action="#" method="post" id="login-form" onsubmit="return authenticateUser()">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name "password" required>
+
+            <label for="role">Role:</label>
+            <select id="role" name="role">
+                <option value="admin">Admin</option>
+                <option value="employee">Employee</option>
+                <option value="product_manager">Product Manager</option>
+                <option value="change_team">Change Team</option>
+                <option value="resource_manager">Resource Manager</option>
+            </select>
+
+            <input type="submit" value="Login">
+        </form>
+    </div>
+    
+    <!-- Admin Data Entry Page -->
+    <div class="container" id="admin-data-entry">
+        <h2>Admin Data Entry</h2>
+        <form action="admin-data-entry-script.php" method="post">
+            <label for="new_employee_name">Enter name of new employee:</label>
+            <input type="text" id="new_employee_name" name="new_employee_name" required>
+
+            <label for="new_employee_role">Role of new employee:</label>
+            <input type="text" id="new_employee_role" name="new_employee_role" required>
+
+            <label for="new_employee_password">Password for new employee:</label>
+            <input type="password" id="new_employee_password" name="new_employee_password" required>
+
+            <input type="submit" value="Submit">
+        </form>
+
+        <button id="logout-button" onclick="logoutUser()">Logout</button>
+    </div>
+
+    <script>
+        let authenticated = false;
+
+        function authenticateUser() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const role = document.getElementById("role").value;
+            
+            // Check username, password, and role for authentication
+            if (username === "sahyadri" && password === "sahyadri" && role === "admin") {
+                authenticated = true;
+                document.getElementById("login-container").style.display = "none"; // Hide the login form
+                document.getElementById("admin-data-entry").style.display = "block";
+                document.getElementById("logout-button").style.display = "block";
+                return false; // Prevent form submission
+            } else {
+                alert("Authentication failed. Please check your credentials.");
+                return false; // Prevent form submission
+            }
+        }
+
+        function logoutUser() {
+            authenticated = false;
+            document.getElementById("login-form").reset();
+            document.getElementById("login-container").style.display = "block"; // Show the login form
+            document.getElementById("admin-data-entry").style.display = "none";
+            document.getElementById("logout-button").style.display = "none";
+            return false;
+        }
+    </script>
+</body>
+</html>

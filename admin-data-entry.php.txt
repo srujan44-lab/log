@@ -1,0 +1,36 @@
+<?php
+session_start();
+
+if ($_SESSION['authenticated'] !== true) {
+    // Redirect to the login page if the user is not authenticated
+    header('Location: login.php');
+    exit;
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Include your HTML head content here -->
+    <title>Admin Data Entry</title>
+</head>
+<body>
+    <div class="container" id="admin-data-entry">
+        <h2>Admin Data Entry</h2>
+        <form action="login.php" method="post">
+            <label for="new_employee_name">Enter name of new employee:</label>
+            <input type="text" id="new_employee_name" name="new_employee_name" required>
+
+            <label for="new_employee_role">Role of new employee:</label>
+            <input type="text" id="new_employee_role" name="new_employee_role" required>
+
+            <label for="new_employee_password">Password for new employee:</label>
+            <input type="password" id="new_employee_password" name="new_employee_password" required>
+
+            <input type="submit" value="Submit">
+        </form>
+
+        <a href="logout.php">Logout</a>
+    </div>
+</body>
+</html>
